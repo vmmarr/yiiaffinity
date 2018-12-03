@@ -12,6 +12,7 @@ class GenerosForm extends Model
     {
         return [
             [['genero'], 'required'],
+            [['genero'], 'string', 'max' => 255],
         ];
     }
 }

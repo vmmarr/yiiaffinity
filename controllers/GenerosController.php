@@ -14,7 +14,8 @@ class GenerosController extends \yii\web\Controller
     public function actionIndex()
     {
         $filas = \Yii::$app->db
-            ->createCommand('SELECT * FROM generos')->queryAll();
+            ->createCommand('SELECT * FROM generos')
+            ->queryAll();
         return $this->render('index', [
             'filas' => $filas,
         ]);
@@ -28,6 +29,7 @@ class GenerosController extends \yii\web\Controller
             Yii::$app->db->createCommand()
                 ->insert('generos', $generosForm->attributes)
                 ->execute();
+            Yii::$app->session->setFlash('success', 'Fila insertada correctamente.');
             return $this->redirect(['generos/index']);
         }
         return $this->render('create', [
@@ -43,6 +45,7 @@ class GenerosController extends \yii\web\Controller
             Yii::$app->db->createCommand()
                 ->update('generos', $generosForm->attributes, ['id' => $id])
                 ->execute();
+            Yii::$app->session->setFlash('success', 'Fila modificada correctamente.');
             return $this->redirect(['generos/index']);
         }
 
@@ -55,6 +58,7 @@ class GenerosController extends \yii\web\Controller
     public function actionDelete($id)
     {
         Yii::$app->db->createCommand()->delete('generos', ['id' => $id])->execute();
+        Yii::$app->session->setFlash('success', 'Fila borrada correctamente.');
         return $this->redirect(['generos/index']);
     }
 

@@ -4,12 +4,14 @@ use yii\helpers\Html;
 <div class="row">
     <table class="table table-striped">
         <thead>
+            <th>Id</th>
             <th>Generos</th>
         </thead>
         <tbody>
             <?php foreach ($filas as $fila): ?>
                 <tr>
                     <td><?= Html::encode($fila['genero']) ?></td>
+                    <td><?= Html::encode($fila['id']) ?></td>
                     <td>
                         <?= Html::a('Modificar', ['generos/update', 'id' => $fila['id']], ['class' => 'btn-xs btn-info']) ?>
                         <?= Html::a('Borrar', ['generos/delete', 'id' => $fila['id']], [
