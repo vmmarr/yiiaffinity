@@ -15,4 +15,11 @@ class GenerosForm extends Model
             [['genero'], 'string', 'max' => 255],
         ];
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'genero' => 'Género',
+        ];
+    }
 }
