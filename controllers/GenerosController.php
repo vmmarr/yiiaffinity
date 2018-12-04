@@ -14,7 +14,9 @@ class GenerosController extends \yii\web\Controller
     public function actionIndex()
     {
         $filas = \Yii::$app->db
-            ->createCommand('SELECT * FROM generos')
+            ->createCommand('SELECT *
+                            FROM generos
+                            ORDER BY genero')
             ->queryAll();
         return $this->render('index', [
             'filas' => $filas,
