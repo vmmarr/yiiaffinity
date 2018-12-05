@@ -1,5 +1,7 @@
 <?php
 use yii\helpers\Html;
+
+use yii\widgets\LinkPager;
 $this->title = 'Listado de peliculas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -31,6 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php endforeach ?>
         </tbody>
     </table>
+</div>
+<div class="row">
+    <div class="text-center">
+        <?= LinkPager::widget(['pagination' => $pagination]) ?>
+    </div>
 </div>
 <div class="row">
     <div class="text-center">

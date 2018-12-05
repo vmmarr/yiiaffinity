@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\PeliculasForm;
 use Yii;
+use yii\data\Pagination;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -13,13 +14,28 @@ class PeliculasController extends \yii\web\Controller
 {
     public function actionIndex()
     {
+        $count = Yii::$app->db
+           ->createCommand('SELECT count(*) FROM peliculas')
+           ->queryScalar();
+        $pagination = new Pagination([
+           'defaultPageSize' => 5,
+           'totalCount' => $count,
+       ]);
         $filas = \Yii::$app->db
             ->createCommand('SELECT p.*, g.genero
                             FROM peliculas p
                             JOIN generos g
-                            ON p.genero_id = g.id')->queryAll();
+                            ON p.genero_id = g.id
+                            ORDER BY titulo
+                            LIMIT :limit
+                            OFFSET :offset', [
+                                ':limit' => $pagination->limit,
+                                'offset' => $pagination->offset,
+                            ])
+            ->queryAll();
         return $this->render('index', [
             'filas' => $filas,
+            'pagination' => $pagination,
         ]);
     }
 
