@@ -1,7 +1,8 @@
 <?php
 use yii\helpers\Html;
-
 use yii\widgets\LinkPager;
+$this->title = 'Listado de genero';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
     <table class="table table-striped">
